@@ -31,8 +31,8 @@ collected from client repos into those files.
 - Scope: template-candidate
 - Symptom: right after `pnpm new-project`, `pnpm test` fails: `tests/update-skills.check.mjs:82` expects "What's new since 0.2.0", which needs the template's CHANGELOG (new-project removes it). Browser tests 20/20, loader 13/13, launch-checks 18/18, progress 10/10 pass. CI runs `pnpm test`, so the staging deploy does not run until this passes.
 - Cause: wf-template 1.0.0 test assumes the template repo; the fix is on the template's unreleased branch `fix/tests-in-client-repos` (1.0.1).
-- Fix: none here yet. Before TQ-01 needs staging bundles, take template 1.0.1 with `pnpm update-skills` once it is released (ask first).
-- Status: open
+- Fix: template 1.0.1's two test files copied by hand (b9dfd11; `update-skills` doesn't copy `tests/`), then `pnpm update-skills` records skills v1.0.1. Staging CI passes since b9dfd11.
+- Status: upstreamed wf-template v1.0.1 (d8213c3); fixed here b9dfd11
 - Found by: claude
 ### 2026-11-20 · `--live` measures staging in most wf:* scripts
 - Area: perf
