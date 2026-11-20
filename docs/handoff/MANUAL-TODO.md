@@ -56,4 +56,5 @@ again at each gate, so the steps are found early and not at the end:
 
 | ID | Where (page › element or class) | Breakpoint | Set | Why the API can't | Done |
 | --- | --- | --- | --- | --- | --- |
-| A | | Desktop | | | ☐ |
+| A | Site settings › Backups | — | Create a backup named `2026-11-20 before wf-template` (ROLLBACK.md) | The API has no backups | ☐ |
+| B | GitHub › brandvm/wf-toronique › Settings | — | Pages › Source: GitHub Actions; branch protection on `master`; Actions › "Allow GitHub Actions to create and approve pull requests" (brandvm has no `developers` team to add) | Repo settings are the person's | ☐ |

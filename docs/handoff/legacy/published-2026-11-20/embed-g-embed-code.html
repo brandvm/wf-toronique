@@ -1,0 +1,55 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/hamounbv/toronique@1.0.0/css/toronique.min.css" />
+<style>
+  /* --------- Native Lightbox | Match Site Styling --------- */
+  .w-lightbox-backdrop,
+  .w-lightbox-static {
+    background-color: color-mix(in srgb, var(--_colors---black) 92%, transparent);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    z-index:99999;
+  }
+
+  .w-lightbox-img {
+    border-radius: var(--_radius---8);
+  }
+
+  .w-lightbox-close {
+    opacity: 0.72;
+    transition: opacity 0.2s ease;
+  }
+  .w-lightbox-close:hover {
+    opacity: 1;
+  }
+
+  .w-lightbox-control {
+    transition:
+      opacity 0.2s ease,
+      background-color 0.2s ease;
+  }
+  .w-lightbox-left:hover,
+  .w-lightbox-right:hover {
+    background-color: color-mix(in srgb, var(--_colors---primary) 16%, transparent);
+  }
+
+  .w-lightbox-spinner {
+    border-color: var(--_colors---primary) transparent transparent !important;
+  }
+
+  .w-lightbox-item {
+    border-radius: var(--_radius---4);
+    overflow: hidden;
+  }
+  .w-lightbox-active::before {
+    border-color: var(--_colors---primary) !important;
+  }
+
+  .w-lightbox-caption {
+    font-family: var(--_typography---font--ui), sans-serif;
+    font-weight: var(--_typography---font-weight--ui);
+    letter-spacing: var(--_typography---letter-spacing--body);
+    color: var(--_colors---white);
+  }
+</style>

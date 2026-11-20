@@ -1,4 +1,4 @@
-# <CLIENT> — Webflow custom code
+# Toronique — Webflow custom code
 
 Agent instructions for this repository. Codex, Cursor and similar tools read
 this file directly; Claude Code reads it through `CLAUDE.md`. It is the single
@@ -6,16 +6,16 @@ source of agent rules — edit this file, never a copy of it.
 
 ## Project facts
 
-Fill these in when the repo is created from the template (`pnpm new-project`).
+Filled in by `pnpm new-project` on 2026-11-20.
 
-- Client / site: `<CLIENT>`
-- GitHub: `<ORG>/<REPO>`, default branch `master`
-- Webflow site ID: `<SITE_ID>`
-- Webflow MCP server: `webflow-<SLUG>` (`.mcp.json`)
-- Staging site: `https://<SLUG>.webflow.io`
-- Staging bundles: `https://<ORG>.github.io/<REPO>/`
-- Production domain: `<DOMAIN or "not attached yet">`
-- Production release: `<RELEASE in the head snippet, or "none yet">`
+- Client / site: `Toronique`
+- GitHub: `brandvm/wf-toronique`, default branch `master`
+- Webflow site ID: `69d6881d0180abb3f22d0133`
+- Webflow MCP server: `webflow-toronique` (`.mcp.json`)
+- Staging site: `https://toronique.webflow.io`
+- Staging bundles: `https://brandvm.github.io/wf-toronique/`
+- Production domain: `https://www.toronique.ca` (live; worked on with the webflow-audit skill)
+- Production release: `none yet` from this repo. Live loads `cdn.jsdelivr.net/gh/hamounbv/toronique@1.0.0` until the parity release (TQ-01); see `docs/handoff/ROLLBACK.md`
 
 ## Who owns what
 

@@ -1,0 +1,146 @@
+<script src="https://cdn.prod.website-files.com/gsap/3.15.0/gsap.min.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/gsap/3.15.0/ScrollTrigger.min.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/gsap/3.15.0/SplitText.min.js" type="text/javascript"></script><script type="text/javascript">gsap.registerPlugin(ScrollTrigger,SplitText);</script><!-- Lenis Smooth Scrolling -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.5/dist/lenis.min.js" defer></script>
+
+
+<!-- Site JS (GitHub → jsDelivr, pinned release) -->
+<script src="https://cdn.jsdelivr.net/gh/hamounbv/toronique@1.0.0/js/toronique.min.js" defer></script>
+
+<!-- Toronique: campaign fields and first-touch lead attribution -->
+<script>
+(function () {
+  'use strict';
+  var storageKey = 'toronique_attribution_v1';
+  function clean(value) { return String(value || '').replace(/[^a-zA-Z0-9._ -]/g, '').slice(0, 100); }
+  function isDomain(host, domain) { return host === domain || host.slice(-(domain.length + 1)) === '.' + domain; }
+  function classify(url, referrer) {
+    var source = clean(url.searchParams.get('utm_source')).toLowerCase();
+    var medium = clean(url.searchParams.get('utm_medium')).toLowerCase();
+    var campaign = clean(url.searchParams.get('utm_campaign'));
+    var host = '';
+    try { host = new URL(referrer).hostname.toLowerCase(); } catch (error) {}
+    if (host === url.hostname || (isDomain(host, 'toronique.ca') && isDomain(url.hostname, 'toronique.ca'))) host = '';
+    var value = source || host;
+    var ai = [['chatgpt.com', 'ChatGPT'], ['chat.openai.com', 'ChatGPT'], ['perplexity.ai', 'Perplexity'], ['claude.ai', 'Claude'], ['gemini.google.com', 'Gemini'], ['copilot.microsoft.com', 'Microsoft Copilot'], ['grok.com', 'Grok']];
+    var label = '';
+    var channel = '';
+    if (source === 'google' && /^(google_business_profile|gbp|gmb)$/i.test(campaign)) {
+      label = 'Google Business Profile'; channel = medium || 'organic';
+    }
+    if (!label) ai.some(function (entry) {
+      if (isDomain(value, entry[0]) || value === entry[1].toLowerCase()) { label = entry[1]; channel = medium || 'AI referral'; return true; }
+      return false;
+    });
+    if (!label && (value === 'google' || /(^|\.)google\.[a-z.]+$/.test(value))) { label = 'Google'; channel = medium || 'organic'; }
+    if (!label && (value === 'bing' || isDomain(value, 'bing.com'))) { label = 'Bing'; channel = medium || 'organic'; }
+    if (!label && (value === 'duckduckgo' || isDomain(value, 'duckduckgo.com'))) { label = 'DuckDuckGo'; channel = medium || 'organic'; }
+    if (!label && (value === 'yahoo' || isDomain(value, 'search.yahoo.com'))) { label = 'Yahoo'; channel = medium || 'organic'; }
+    var social = [['facebook.com', 'Facebook'], ['instagram.com', 'Instagram'], ['linkedin.com', 'LinkedIn'], ['t.co', 'X'], ['x.com', 'X'], ['pinterest.com', 'Pinterest'], ['youtube.com', 'YouTube']];
+    if (!label) social.some(function (entry) {
+      if (isDomain(value, entry[0]) || value === entry[1].toLowerCase()) { label = entry[1]; channel = medium || 'social'; return true; }
+      return false;
+    });
+    if (!label && source) { label = source; channel = medium || 'tagged'; }
+    if (!label && host) { label = host; channel = 'referral'; }
+    return { source: label || 'Direct / unknown', medium: channel || 'unknown', campaign: campaign, landing: url.pathname, referrer: host };
+  }
+  var current = classify(new URL(window.location.href), document.referrer);
+  var first = current;
+  try {
+    var saved = JSON.parse(sessionStorage.getItem(storageKey) || 'null');
+    if (saved && ['source', 'medium', 'campaign', 'landing', 'referrer'].every(function (key) { return typeof saved[key] === 'string'; })) first = saved;
+    else sessionStorage.setItem(storageKey, JSON.stringify(current));
+  } catch (error) { /* Attribution must never block a form. */ }
+  function populate() {
+    var fields = [['lead_source', 'Lead source', first.source], ['lead_medium', 'Lead medium', first.medium], ['lead_campaign', 'Lead campaign', first.campaign], ['first_landing_page', 'First landing page', first.landing], ['referring_domain', 'Referring domain', first.referrer]];
+    document.querySelectorAll('form').forEach(function (form) {
+      fields.forEach(function (entry) {
+        var input = form.querySelector('input[name="' + entry[0] + '"]');
+        if (!input) { input = document.createElement('input'); input.type = 'hidden'; input.name = entry[0]; input.setAttribute('data-name', entry[1]); form.appendChild(input); }
+        input.value = entry[2];
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', populate);
+  else populate();
+  document.addEventListener('submit', populate, true);
+})();
+
+(function () {
+  'use strict';
+  var keys = ['utm_id', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  var params = new URLSearchParams(window.location.search);
+  var values = {};
+  keys.forEach(function (key) {
+    var value = params.get(key);
+    try {
+      if (value) sessionStorage.setItem('toronique_' + key, value.slice(0, 200));
+      value = sessionStorage.getItem('toronique_' + key) || value;
+    } catch (error) { /* Keep forms usable when storage is unavailable. */ }
+    values[key] = String(value || '').slice(0, 200);
+  });
+  function populateCampaignFields() {
+    document.querySelectorAll('form').forEach(function (form) {
+      keys.forEach(function (key) {
+        var input = form.querySelector('input[name="' + key + '"]');
+        if (!input) {
+          input = document.createElement('input'); input.type = 'hidden'; input.name = key;
+          input.setAttribute('data-name', key); form.appendChild(input);
+        }
+        input.value = values[key];
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', populateCampaignFields);
+  else populateCampaignFields();
+  document.addEventListener('submit', populateCampaignFields, true);
+})();
+
+</script>
+
+<!-- Toronique: GA4 confirmed form-success lead conversions -->
+<script>
+(function () {
+  'use strict';
+  if (window.toroniqueLeadConversionsInstalled) return;
+  window.toroniqueLeadConversionsInstalled = true;
+  function visible(element) {
+    if (!element || element.hidden) return false;
+    var style = window.getComputedStyle(element);
+    return style.display !== 'none' && style.visibility !== 'hidden';
+  }
+  function install() {
+    document.querySelectorAll('.w-form').forEach(function (wrapper) {
+      var form = wrapper.querySelector('form');
+      var success = wrapper.querySelector('.w-form-done');
+      var failure = wrapper.querySelector('.w-form-fail');
+      if (!form || !success) return;
+      var pending = false;
+      function inspectResult() {
+        if (!pending) return;
+        if (visible(success)) {
+          pending = false;
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'generate_lead', {
+              send_to: 'G-K4YFBYYRMS',
+              method: 'Webflow',
+              form_id: form.id || 'contact-form',
+              form_name: form.getAttribute('data-name') || 'Contact form'
+            });
+          }
+        } else if (visible(failure)) {
+          pending = false;
+        }
+      }
+      form.addEventListener('submit', function () {
+        if (typeof form.checkValidity !== 'function' || form.checkValidity()) pending = true;
+      }, true);
+      var observer = new MutationObserver(inspectResult);
+      observer.observe(success, { attributes: true, attributeFilter: ['style', 'class', 'hidden', 'aria-hidden'] });
+      if (failure) observer.observe(failure, { attributes: true, attributeFilter: ['style', 'class', 'hidden', 'aria-hidden'] });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', install);
+  else install();
+})();
+
+</script>

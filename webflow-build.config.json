@@ -1,0 +1,33 @@
+{
+  "prototypeUrl": "http://127.0.0.1:5758",
+  "stagingUrl": "https://toronique.webflow.io",
+  "repoDir": ".",
+  "bundlePattern": "brandvm\\.github\\.io/wf-toronique/(index\\.js|styles\\.css)",
+  "widths": [
+    [
+      1440,
+      900
+    ],
+    [
+      820,
+      1180
+    ],
+    [
+      667,
+      375
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "pages": [
+    "/",
+    "/about",
+    "/services",
+    "/services/custom-home-building",
+    "/portfolio",
+    "/contact"
+  ],
+  "liveUrl": "https://www.toronique.ca"
+}
