@@ -46,6 +46,29 @@ can see changes. No fix rides along.
 7. Tag `v1.0.0` on the commit whose CI passed (jsDelivr then serves
    `brandvm/wf-toronique@1.0.0/dist/`).
 
+### Status (2026-11-23): repo side done, branch `tq-01-parity`
+
+- `src/styles.css` = legacy `toronique.css` byte for byte under a header
+  comment; `src/legacy/toronique.js` = legacy `toronique.js` byte for byte
+  between two wrapper lines (`export default function runToronique() {` … `}`),
+  run through `run('toronique', …)` so an error in it stays inside it, as
+  in its own `<script>` (the template tests have no GSAP, and the Lenis
+  block's `ScrollTrigger` reference threw and stopped the whole bundle
+  before the wrap). Lenis 1.1.5 bundled and set on `window.Lenis` first.
+- `pnpm check` and `pnpm test` pass (20 browser tests, 46 node checks).
+  `dist/`: index.js 24.8 kB, styles.css 7.7 kB.
+- **`wf:parity --live`**, 6 key pages × 4 widths, old hamounbv CSS/JS →
+  `dist/`, Lenis CDN → nothing: same element count and classes on all 24
+  renders, no new errors. Remaining differences are noise: the
+  `.w-container` auto side margins at 1440 (0 ↔ 113–130 px; the
+  `--control` run, published vs published, shows the same) and a 1/64 px
+  top margin on `.project-card-visual-w` that comes and goes between
+  identical runs (no rule in this CSS sets it). Custom-property *text* is
+  ignored (`parity.ignore`): esbuild writes `.54902` for `0.54902`; the
+  computed styles that use them are compared.
+- Not checkable before Webflow: the load sequence with the new loader
+  (`wf:film`) and the CSS arriving through Embed 2a; both on staging.
+
 ### In Webflow (after the go-ahead; through `webflow-toronique`)
 
 | Where | Now | After |
