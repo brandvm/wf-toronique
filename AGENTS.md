@@ -15,7 +15,7 @@ Filled in by `pnpm new-project` on 2026-11-20.
 - Staging site: `https://toronique.webflow.io`
 - Staging bundles: `https://brandvm.github.io/wf-toronique/`
 - Production domain: `https://www.toronique.ca` (live; worked on with the webflow-audit skill)
-- Production release: `none yet` from this repo. Live loads `cdn.jsdelivr.net/gh/hamounbv/toronique@1.0.0` until the parity release (TQ-01); see `docs/handoff/ROLLBACK.md`
+- Production release: `none installed yet`. Tag `v1.0.0` (c7ed5d0, TQ-01 parity) exists but is not in Webflow; live still loads `cdn.jsdelivr.net/gh/hamounbv/toronique@1.0.0` until TQ-01 is published (see `docs/handoff/ROLLBACK.md`)
 
 ## Who owns what
 

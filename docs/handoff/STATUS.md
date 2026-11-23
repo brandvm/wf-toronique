@@ -8,7 +8,7 @@ States: not started · in progress · on staging · live · dropped (why).
 
 | ID | Area | Request | State | Batch | Steps | Date |
 | --- | --- | --- | --- | --- | --- | --- |
-| TQ-01 | Code | Move custom code off a personal GitHub account | in progress (repo port done on branch tq-01-parity, parity checked; Webflow not touched) | 1: parity release | TQ-2, TQ-4 | 2026-11-23 |
+| TQ-01 | Code | Move custom code off a personal GitHub account | in progress (merged, PR #1; tag v1.0.0 on c7ed5d0, served by jsDelivr; Webflow not touched) | 1: parity release | TQ-2, TQ-4, TQ-5 | 2026-11-23 |
 | TQ-02 | SEO | Number markers out of the service H3s | not started | | | |
 | TQ-03 | SEO | Fix the HTML entities in 5 Service schema blocks | not started | | | |
 | TQ-04 | SEO | llms.txt: drop or fix the commercial contractor entry (301s) | not started | | | |

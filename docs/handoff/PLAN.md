@@ -69,6 +69,15 @@ can see changes. No fix rides along.
 - Not checkable before Webflow: the load sequence with the new loader
   (`wf:film`) and the CSS arriving through Embed 2a; both on staging.
 
+### Status (2026-11-23): merged and tagged
+
+- PR brandvm/wf-toronique#1 merged (c7ed5d0). Master CI: test and deploy
+  passed; `brandvm.github.io/wf-toronique/` styles.css and index.js are
+  byte-identical to `dist/`.
+- Tag `v1.0.0` on c7ed5d0; `cdn.jsdelivr.net/gh/brandvm/wf-toronique@1.0.0/dist/`
+  serves both files byte-identical. `RELEASE = "1.0.0"` is what the head
+  code will carry.
+
 ### In Webflow (after the go-ahead; through `webflow-toronique`)
 
 | Where | Now | After |
