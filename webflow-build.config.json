@@ -29,5 +29,13 @@
     "/portfolio",
     "/contact"
   ],
-  "liveUrl": "https://www.toronique.ca"
+  "liveUrl": "https://www.toronique.ca",
+  "parity": {
+    "oldAssets": {
+      "cdn\\.jsdelivr\\.net/gh/hamounbv/toronique@1\\.0\\.0/css/toronique\\.min\\.css": "styles.css",
+      "cdn\\.jsdelivr\\.net/gh/hamounbv/toronique@1\\.0\\.0/js/toronique\\.min\\.js": "index.js",
+      "cdn\\.jsdelivr\\.net/npm/lenis@1\\.1\\.5/dist/lenis\\.min\\.js": ""
+    },
+    "ignore": "--[\\w-]+"
+  }
 }

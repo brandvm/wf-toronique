@@ -25,6 +25,14 @@ collected from client repos into those files.
 
 ## This project
 
+### 2026-11-23 · wf:parity reports minified custom-property text as differences
+- Area: css
+- Scope: template-candidate
+- Symptom: `wf:parity --live` listed 200+ differences per page, all custom properties (`--x: color(display-p3 0.54902 …)` → `color( display-p3 .54902 …)`, whitespace in `clamp()`), when the old sheet was jsDelivr-minified and ours is esbuild-minified.
+- Cause: computed custom properties keep their source text; the two minifiers write numbers and spaces differently. The styles that use them were identical.
+- Fix: `"parity": { "ignore": "--[\\w-]+" }` in the config; everything else is still compared. Also noise here: `.w-container` auto margins at 1440 flip between runs (the `--control` run shows it).
+- Status: open
+- Found by: claude
 <!-- Add new entries here, newest first. -->
 ### 2026-11-20 · `pnpm test` fails in a fresh client repo (update-skills check)
 - Area: ci

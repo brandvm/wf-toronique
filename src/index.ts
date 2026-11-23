@@ -4,6 +4,10 @@
 import { initAriaRoles } from './modules/aria-roles';
 import { initPlaceholders } from './modules/placeholders';
 import { initUniqueFormIds } from './modules/unique-form-ids';
+// TQ-01 parity: the site's existing code, unchanged (hamounbv/toronique@1.0.0
+// js/toronique.js). Lenis goes on window first (import order).
+import './legacy/lenis-global';
+import runToronique from './legacy/toronique.js';
 
 // Each module runs in isolation: one that throws is logged and skipped,
 // and every module after it still initializes.
@@ -28,6 +32,10 @@ function boot() {
   run('unique-form-ids', initUniqueFormIds);
   // Add project feature initializers here: run('<name>', init<Name>);
 }
+
+// The legacy code runs at once, as the deferred <script> did; it waits for
+// the DOM itself where it needs to.
+run('toronique', runToronique);
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', boot, { once: true });
