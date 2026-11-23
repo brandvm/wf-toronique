@@ -1,10 +1,9 @@
 # Session report: 2026-11-23
 
-The Claude Code sessions listed below were archived on 2026-11-23 to keep the Claude app responsive. This file records where each one left off, so a new session can pick up the work.
+The Claude Code sessions listed below were archived and then deleted on 2026-11-23 to keep the Claude app responsive. This file records where each one left off, so a new session can pick up the work.
 
 Read this with `HANDOFF.md` (the project brief and its Status section). If something here conflicts with `HANDOFF.md`, `HANDOFF.md` and the git history are more current.
 
-To reopen a session, go to the Claude app's sidebar → Archived, or use the session link while the app is installed.
 
 ## Open items
 
@@ -26,7 +25,7 @@ Latest commits on the default branch:
 ### Toronique: set up on wf-template
 
 - **Active:** 2026-11-20 → 2026-11-23 11:28
-- **Session:** [local_bcc2f5bf-ac4d-4a66-b87e-83c1fdbddb08](claude://claude.ai/epitaxy/local_bcc2f5bf-ac4d-4a66-b87e-83c1fdbddb08) (archived)
+- **Session:** `local_bcc2f5bf-ac4d-4a66-b87e-83c1fdbddb08` (deleted 2026-11-23)
 - **PR:** [brandvm/wf-toronique#1](https://github.com/brandvm/wf-toronique/pull/1)
 - **Started with:** "Another Claude session sent a message: <cross-session-message from="local_63d734be-a5b4-428c-b937-21a62dc9c2d3" from-name="Harvest client lessons, then audit 8 client sites"> Go-ahead from the user ("can you tell them?", after the next-step list): take wf-template 1.0.1 (including its by-hand step f…"
 - **Where it ended:** PR #1 is merged (c7ed5d0) and tagged v1.0.0.
